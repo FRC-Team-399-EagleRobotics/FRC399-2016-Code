@@ -36,8 +36,8 @@ public class Main extends IterativeRobot{
 		SmartDashboard.putData("Autonomous Chooser" , autonChooser);
 		
 		robot = Robot.getInstance();
-		robot.camera.setQuality(20);
-		robot.camera.startAutomaticCapture("cam1");
+		//robot.camera.setQuality(20);
+		//robot.camera.startAutomaticCapture("cam1");
 		robot.intake.resetSensors();
 		robot.intake.resetValues();
 	}
@@ -60,15 +60,16 @@ public class Main extends IterativeRobot{
 			autoCommand.cancel();
 		}
 		
-		robot.camera.setQuality(20);
-		robot.camera.startAutomaticCapture("cam0");
+		//robot.camera.setQuality(20);
+		//robot.camera.startAutomaticCapture("cam0");
 		robot.intake.setState(Intake.State.STOW);
 		}	
 	
 	public void teleopPeriodic() {
-		double leftInput = driverLeft.getRawAxis(1);
+		double leftInput = driverLeft.getRawAxis(1) * .95;
 		double rightInput = driverRight.getRawAxis(1);
 		
+		System.out.println("Drive work! " + leftInput);
 		robot.drivetrain.tankDrive(leftInput, rightInput);	
 		robot.intake.run();
 		
